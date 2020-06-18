@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.husy</groupId>
-    <artifactId>spring-demo</artifactId>
+    <artifactId>springboot-demo</artifactId>
     <version>1.0.0</version>
-    <name>spring-demo</name>
+    <name>springboot-demo</name>
     <description>Spring Boot的模版项目</description>
 
     <properties>

@@ -17,6 +17,6 @@
 
     <modules>
         <!--SpringBoot 项目模版-->
-        <module>spring-demo</module>
+        <module>springboot-demo</module>
     </modules>
 </project>
