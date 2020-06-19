@@ -14,8 +14,13 @@
     <name>springboot-demo</name>
     <description>Spring Boot的模版项目</description>
 
+
     <properties>
         <java.version>1.8</java.version>
+        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <cglib.version>3.3.0</cglib.version>
+        <velocity.version>2.2</velocity.version>
+        <druid.version>1.1.22</druid.version>
     </properties>
 
     <dependencies>
@@ -32,7 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -54,7 +58,30 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
+            <version>${cglib.version}</version>
+        </dependency>
+        <!--引入mybatis-plus 依赖-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!--引入mybatis-plus-generator 依赖-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>${velocity.version}</version>
+        </dependency>
+        <!--引入数据库连接池 Druid 依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
         </dependency>
     </dependencies>
 
