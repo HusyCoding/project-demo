@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ycxc.admin.dao.ycxcadmin.mapper.SysRoleMapper">
+
+    <select id="listRolesByUserId" resultType="com.ycxc.admin.dao.ycxcadmin.entity.SysRole">
+        SELECT sr.sys_role_id, sr.role_name, sr.remark, sr.sort, sr.create_time, sr.update_time, sr.delete_time, sr.create_id, sr.update_id, sr.delete_id, sr.deleted, sr.city_permissions, sr.role_type, sr.data_range
+        FROM sys_role sr
+        INNER JOIN sys_user_role sur ON sur.user_role_id = sr.sys_role_id
+        WHERE sr.deleted = 0 AND sur.sys_user_id=#{sysUserId}
+
+    </select>
+</mapper>
