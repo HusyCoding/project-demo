@@ -19,12 +19,12 @@ import java.util.concurrent.TimeUnit;
  * @date: 2020/6/20 15:06
  */
 @Component
-public class RedisUtils {
-    private Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+public class RedisTool {
+    private Logger logger = LoggerFactory.getLogger(RedisTool.class);
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    public RedisUtils(RedisTemplate<String, Object> redisTemplate) {
+    public RedisTool(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
