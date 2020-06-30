@@ -27,12 +27,8 @@ import java.util.LinkedHashMap;
  */
 @Configuration
 public class ShiroConfig {
-    // Session 超时失效时间
-    //private final int SESSION_TIMEOUT = 30 * 60 * 1000;
-    // Cookie 超时失效时间
+    // redis 缓存失效时间
     private final int CACHE_TIMEOUT = 30 * 60 * 1000;
-    // redis 有效期
-    //private final int REDIS_TIMEOUT = 2000;
 
     @Value("${spring.redis.host}")
     public String redis_host;
@@ -55,16 +51,6 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
 
-        // shiro [main] 模块过滤
-        // 没有登陆的用户只能访问登陆页面； 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        // 配器shirot认登录累面地址，前后端分离中登录累面跳转应由前端路由控制，后台仅返回json数据, 对应LoginController中unauth请求
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        // 登录成功后要跳转的链接；此项目是前后端分离，故此行注释掉，登录成功之后返回用户基本信息及token给前端
-        //shiroFilterFactoryBean.setSuccessUrl("/index");
-
-        // 未授权界面;对应LoginController中 unauthorized 请求
-        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
-
         /* shiro [urls] 模块过滤；配置访问权限 必须是LinkedHashMap，因为它必须保证有序
          * 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
          * anon:所有url都都可以匿名访问，
@@ -84,6 +70,15 @@ public class ShiroConfig {
         // 退出配置过滤器,其中的具体的退出代码Shiro已经替我们实现了, 位置放在 anon、authc下面
         filterChainDefinitionMap.put("/logout", "logout");
 
+        // shiro [main] 模块过滤
+        // 没有登陆的用户只能访问登陆页面； 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        // 配器shirot认登录累面地址，前后端分离中登录累面跳转应由前端路由控制，后台仅返回json数据, 对应LoginController中unauth请求
+        shiroFilterFactoryBean.setLoginUrl("/un_auth");
+        // 登录成功后要跳转的链接；此项目是前后端分离，故此行注释掉，登录成功之后返回用户基本信息及token给前端
+        //shiroFilterFactoryBean.setSuccessUrl("/index");
+
+        // 未授权界面;对应LoginController中 unauthorized 请求
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -136,32 +131,10 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultWebSessionManager sessionManager() {
-        //自定义session
-        DefaultWebSessionManager sessionManager = new ShiroSessionManager();
+        //自定义sessionManager
+        ShiroSessionManager sessionManager = new ShiroSessionManager();
         //设置sessionDao
         sessionManager.setSessionDAO(sessionDAO());
-        //配置session的监听
-        //Collection<SessionListener> listeners = new ArrayList<>();
-        //listeners.add(sessionListener());
-        //sessionManager.setSessionListeners(listeners);
-        // session 工厂
-        //sessionManager.setSessionFactory(sessionFactory());
-
-        // 全局会话超时时间（单位毫秒），默认30分钟
-        sessionManager.setGlobalSessionTimeout(1800000);
-        //设置在cookie
-        sessionManager.setSessionIdCookieEnabled(true);
-        sessionManager.setSessionIdCookie(sessionIdCookie());
-        //是否开启定时调度器进行检测过期session 默认为true
-        sessionManager.setSessionValidationSchedulerEnabled(false);
-        //是否开启删除无效的session对象  默认为true
-        sessionManager.setDeleteInvalidSessions(true);
-        //设置session失效的扫描时间, 清理用户直接关闭浏览器造成的孤立会话 默认为 1个小时
-        //设置该属性 就不需要设置 ExecutorServiceSessionValidationScheduler 底层也是默认自动调用ExecutorServiceSessionValidationScheduler
-        // 设置session失效的扫描时间,默认60分钟
-        sessionManager.setSessionValidationInterval(3600000);
-        //取消url 后面的 JSESSIONID
-        sessionManager.setSessionIdUrlRewritingEnabled(false);
         return sessionManager;
     }
 
@@ -179,6 +152,8 @@ public class ShiroConfig {
         // redis中针对不同用户缓存
         // 必须要设置主键名称，shiro-redis 插件用过这个缓存用户信息
         redisCacheManager.setPrincipalIdFieldName("userId");
+        //用户权限信息缓存时间
+        redisCacheManager.setExpire(CACHE_TIMEOUT);
         return redisCacheManager;
     }
 
@@ -191,7 +166,7 @@ public class ShiroConfig {
         // 散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         // 散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
+        hashedCredentialsMatcher.setHashIterations(1);
         return hashedCredentialsMatcher;
     }
 

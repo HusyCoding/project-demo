@@ -1,5 +1,8 @@
 package com.husy.springdemo.common.tool;
 
+import com.husy.springdemo.dao.entity.SysUser;
+import org.apache.shiro.SecurityUtils;
+
 /**
  * 系统用户工具类
  * @author: husy

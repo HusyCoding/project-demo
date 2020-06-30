@@ -1,17 +1,17 @@
 package com.husy.springdemo.service.mybatisplus;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.husy.springdemo.dao.entity.SysRole;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
 /**
  * <p>
- * 角色 服务类
+ * 系统角色表 服务类
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public interface ISysRoleService extends IService<SysRole> {
     /**
@@ -19,5 +19,5 @@ public interface ISysRoleService extends IService<SysRole> {
      * @param sysUserId
      * @return
      */
-    List<SysRole> listRolesByUserId(String sysUserId);
+    List<SysRole> listRolesByUserId(Integer sysUserId);
 }

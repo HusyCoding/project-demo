@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.husy.springdemo.dao.mapper.SysMenuMapper">
+
     <select id="listMenusByRoleId" resultType="com.husy.springdemo.dao.entity.SysMenu">
-      SELECT sm.menu_id,sm.menu_code,sm.parent_code,sm.menu_level,sm.menu_name,sm.permission,sm.menu_order,sm.is_spread,sm.`status`
-      FROM sys_menu sm
-      INNER JOIN sys_role_menu srm ON srm.menu_id = sm.menu_id
-      WHERE sm.is_deleted = 0 AND srm.role_id=#{sysRoleId}
+        SELECT sm.menu_id,sm.menu_code,sm.parent_code,sm.menu_level,sm.menu_name,sm.permission,sm.menu_order,sm.is_spread,sm.`status`
+        FROM sys_menu sm
+        INNER JOIN sys_role_menu srm ON srm.menu_id = sm.menu_id
+        WHERE sm.is_deleted = 0 AND srm.role_id=#{sysRoleId}
     </select>
 </mapper>

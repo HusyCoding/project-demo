@@ -57,33 +57,29 @@ public class MySqlCodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/demo?serverTimezone=Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/husy_db?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-//        dsc.setTypeConvert(new MySqlTypeConvert() {
-//            @Override
-//            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-//                //tinyint转换成Boolean
-//                if (fieldType.toLowerCase().contains("tinyint")) {
-//                    return DbColumnType.BOOLEAN;
-//                }
-//                //将数据库中datetime转换成date
-//                if (fieldType.toLowerCase().contains("datetime")) {
-//                    return DbColumnType.DATE;
-//                }
-//                //将数据库中datetime转换成date
-//                if (fieldType.toLowerCase().contains("timestamp")) {
-//                    return DbColumnType.DATE;
-//                }
-//                //将数据库中datetime转换成date
-//                if (fieldType.toLowerCase().contains("char")) {
-//                    return DbColumnType.STRING;
-//                }
-//                return super.processTypeConvert(globalConfig, fieldType);
-//            }
-//        });
+        dsc.setTypeConvert(new MySqlTypeConvert() {
+            @Override
+            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+                //将数据库中datetime转换成date
+                if (fieldType.toLowerCase().contains("datetime")) {
+                    return DbColumnType.DATE;
+                }
+                //将数据库中datetime转换成date
+                if (fieldType.toLowerCase().contains("timestamp")) {
+                    return DbColumnType.DATE;
+                }
+                //将数据库中datetime转换成date
+                if (fieldType.toLowerCase().contains("char")) {
+                    return DbColumnType.STRING;
+                }
+                return super.processTypeConvert(globalConfig, fieldType);
+            }
+        });
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -151,7 +147,8 @@ public class MySqlCodeGenerator {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         //strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
-        strategy.setEntityLombokModel(true);
+        //禁止使用lombok注解
+        strategy.setEntityLombokModel(false);
         strategy.setRestControllerStyle(true);
         // 公共父类
         //strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");

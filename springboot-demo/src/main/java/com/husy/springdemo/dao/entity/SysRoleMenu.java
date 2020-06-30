@@ -1,17 +1,15 @@
 package com.husy.springdemo.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * <p>
  * 系统角色与菜单对应关系
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public class SysRoleMenu implements Serializable {
 
@@ -20,50 +18,43 @@ public class SysRoleMenu implements Serializable {
     /**
      * 角色ID
      */
-    @TableField("role_id")
-    private String roleId;
+    private Integer roleId;
 
     /**
      * 菜单ID
      */
-    @TableField("menu_id")
     private Integer menuId;
 
     /**
      * 选中状态：0未选中,1选中,2半选
      */
-    @TableField("check_state")
     private Integer checkState;
 
     /**
      * 创建时间
      */
-    @TableField("create_time")
     private Date createTime;
 
     /**
-     * 创建用户
+     * 创建用户ID
      */
-    @TableField("create_id")
-    private String createId;
+    private Integer createId;
 
     /**
      * 更新时间
      */
-    @TableField("update_time")
     private Date updateTime;
 
     /**
-     * 更新用户
+     * 更新用户ID
      */
-    @TableField("update_id")
-    private String updateId;
+    private Integer updateId;
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
     public Integer getMenuId() {
@@ -87,11 +78,11 @@ public class SysRoleMenu implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-    public String getCreateId() {
+    public Integer getCreateId() {
         return createId;
     }
 
-    public void setCreateId(String createId) {
+    public void setCreateId(Integer createId) {
         this.createId = createId;
     }
     public Date getUpdateTime() {
@@ -101,24 +92,24 @@ public class SysRoleMenu implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-    public String getUpdateId() {
+    public Integer getUpdateId() {
         return updateId;
     }
 
-    public void setUpdateId(String updateId) {
+    public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
     }
 
     @Override
     public String toString() {
         return "SysRoleMenu{" +
-        "roleId=" + roleId +
-        ", menuId=" + menuId +
-        ", checkState=" + checkState +
-        ", createTime=" + createTime +
-        ", createId=" + createId +
-        ", updateTime=" + updateTime +
-        ", updateId=" + updateId +
+            "roleId=" + roleId +
+            ", menuId=" + menuId +
+            ", checkState=" + checkState +
+            ", createTime=" + createTime +
+            ", createId=" + createId +
+            ", updateTime=" + updateTime +
+            ", updateId=" + updateId +
         "}";
     }
 }

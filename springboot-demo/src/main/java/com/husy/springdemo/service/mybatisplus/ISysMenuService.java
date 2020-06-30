@@ -1,7 +1,7 @@
 package com.husy.springdemo.service.mybatisplus;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.husy.springdemo.dao.entity.SysMenu;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  * 系统菜单 服务类
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public interface ISysMenuService extends IService<SysMenu> {
     /**
@@ -19,5 +19,5 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @param sysRoleId
      * @return
      */
-    List<SysMenu> listMenusByRoleId(String sysRoleId);
+    List<SysMenu> listMenusByRoleId(Integer sysRoleId);
 }

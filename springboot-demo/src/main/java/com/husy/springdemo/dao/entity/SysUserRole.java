@@ -1,100 +1,82 @@
 package com.husy.springdemo.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 
 /**
  * <p>
- * 用户与角色对应关系
+ * 系统用户角色关系表
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public class SysUserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId("user_role_id")
-    private String userRoleId;
+    @TableId(value = "user_role_id", type = IdType.AUTO)
+    private Integer userRoleId;
 
     /**
-     * 用户ID
+     * 用户id
      */
-    @TableField("sys_user_id")
-    private String sysUserId;
+    private Integer userId;
 
     /**
-     * 角色ID
+     * 角色id
      */
-    @TableField("sys_role_id")
-    private String sysRoleId;
+    private Integer roleId;
+
+    /**
+     * 创建人id
+     */
+    private Integer createId;
 
     /**
      * 创建时间
      */
-    @TableField("create_time")
     private Date createTime;
+
+    /**
+     * 更新人id
+     */
+    private Integer updateId;
 
     /**
      * 更新时间
      */
-    @TableField("update_time")
     private Date updateTime;
 
-    /**
-     * 删除时间
-     */
-    @TableField("delete_time")
-    private Date deleteTime;
-
-    /**
-     * 创建用户
-     */
-    @TableField("create_id")
-    private String createId;
-
-    /**
-     * 更新用户
-     */
-    @TableField("update_id")
-    private String updateId;
-
-    /**
-     * 删除用户
-     */
-    @TableField("delete_id")
-    private String deleteId;
-
-    /**
-     * 0-未删除，1-已删除
-     */
-    @TableField("deleted")
-    private Integer deleted;
-
-    public String getUserRoleId() {
+    public Integer getUserRoleId() {
         return userRoleId;
     }
 
-    public void setUserRoleId(String userRoleId) {
+    public void setUserRoleId(Integer userRoleId) {
         this.userRoleId = userRoleId;
     }
-    public String getSysUserId() {
-        return sysUserId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setSysUserId(String sysUserId) {
-        this.sysUserId = sysUserId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-    public String getSysRoleId() {
-        return sysRoleId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setSysRoleId(String sysRoleId) {
-        this.sysRoleId = sysRoleId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+    public Integer getCreateId() {
+        return createId;
+    }
+
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
     }
     public Date getCreateTime() {
         return createTime;
@@ -103,6 +85,13 @@ public class SysUserRole implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    public Integer getUpdateId() {
+        return updateId;
+    }
+
+    public void setUpdateId(Integer updateId) {
+        this.updateId = updateId;
+    }
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -110,55 +99,17 @@ public class SysUserRole implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-    public Date getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(Date deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-    public String getCreateId() {
-        return createId;
-    }
-
-    public void setCreateId(String createId) {
-        this.createId = createId;
-    }
-    public String getUpdateId() {
-        return updateId;
-    }
-
-    public void setUpdateId(String updateId) {
-        this.updateId = updateId;
-    }
-    public String getDeleteId() {
-        return deleteId;
-    }
-
-    public void setDeleteId(String deleteId) {
-        this.deleteId = deleteId;
-    }
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
 
     @Override
     public String toString() {
         return "SysUserRole{" +
-        "userRoleId=" + userRoleId +
-        ", sysUserId=" + sysUserId +
-        ", sysRoleId=" + sysRoleId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleteTime=" + deleteTime +
-        ", createId=" + createId +
-        ", updateId=" + updateId +
-        ", deleteId=" + deleteId +
-        ", deleted=" + deleted +
+            "userRoleId=" + userRoleId +
+            ", userId=" + userId +
+            ", roleId=" + roleId +
+            ", createId=" + createId +
+            ", createTime=" + createTime +
+            ", updateId=" + updateId +
+            ", updateTime=" + updateTime +
         "}";
     }
 }

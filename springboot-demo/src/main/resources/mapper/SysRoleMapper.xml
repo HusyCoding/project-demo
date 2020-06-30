@@ -7,6 +7,5 @@
         FROM sys_role sr
         INNER JOIN sys_user_role sur ON sur.user_role_id = sr.sys_role_id
         WHERE sr.deleted = 0 AND sur.sys_user_id=#{sysUserId}
-
     </select>
 </mapper>

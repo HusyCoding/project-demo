@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8043
   servlet:
     context-path: /
 
@@ -83,7 +83,7 @@ mybatis-plus:
 
 #logback日志配置
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   file:
     path: /logs
 

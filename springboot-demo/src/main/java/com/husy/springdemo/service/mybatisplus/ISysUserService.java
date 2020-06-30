@@ -1,15 +1,15 @@
 package com.husy.springdemo.service.mybatisplus;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.husy.springdemo.dao.entity.SysUser;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 系统用户 服务类
+ * 系统用户表 服务类
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public interface ISysUserService extends IService<SysUser> {
     /**

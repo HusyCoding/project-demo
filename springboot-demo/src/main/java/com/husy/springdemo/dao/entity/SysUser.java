@@ -1,144 +1,93 @@
 package com.husy.springdemo.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 
 /**
  * <p>
- * 系统用户
+ * 系统用户表
  * </p>
  *
- * @author generator
- * @since 2020-06-28
+ * @author husy
+ * @since 2020-06-30
  */
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId("sys_user_id")
-    private String sysUserId;
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Integer userId;
 
     /**
-     * 用户名
+     * 用户账号
      */
-    @TableField("username")
-    private String username;
+    private String account;
 
     /**
-     * 密码
+     * 用户密码
      */
-    @TableField("password")
     private String password;
 
     /**
-     * 显示名
+     * 用户名称
      */
-    @TableField("nickname")
-    private String nickname;
+    private String username;
 
     /**
-     * 头像
+     * 用户性别，0：男，1：女
      */
-    @TableField("icon")
-    private String icon;
+    private Integer sex;
 
     /**
-     * 盐
+     * 手机号码
      */
-    @TableField("salt")
-    private String salt;
-
-    /**
-     * 邮箱
-     */
-    @TableField("email")
-    private String email;
-
-    /**
-     * 手机号
-     */
-    @TableField("mobile")
     private String mobile;
 
     /**
      * 状态  0：正常   1：禁用
      */
-    @TableField("status")
     private Integer status;
 
     /**
-     * 0：普通用户，1：管理员
+     * 创建人ID
      */
-    @TableField("user_type")
-    private Integer userType;
-
-    /**
-     * 数据查询方式 0：前缀查询，1：模糊查询
-     */
-    @TableField("query_type")
-    private Integer queryType;
-
-    @TableField("department_id")
-    private String departmentId;
+    private Integer createId;
 
     /**
      * 创建时间
      */
-    @TableField("create_time")
     private Date createTime;
+
+    /**
+     * 更新人ID
+     */
+    private Integer updateId;
 
     /**
      * 更新时间
      */
-    @TableField("update_time")
     private Date updateTime;
 
     /**
-     * 删除时间
+     * 是否删除，0：否，1：是
      */
-    @TableField("delete_time")
-    private Date deleteTime;
+    private Boolean isDelete;
 
-    /**
-     * 创建用户
-     */
-    @TableField("create_id")
-    private String createId;
-
-    /**
-     * 更新用户
-     */
-    @TableField("update_id")
-    private String updateId;
-
-    /**
-     * 删除用户
-     */
-    @TableField("delete_id")
-    private String deleteId;
-
-    /**
-     * 0-未删除，1-已删除
-     */
-    @TableField("deleted")
-    private Integer deleted;
-
-    public String getSysUserId() {
-        return sysUserId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setSysUserId(String sysUserId) {
-        this.sysUserId = sysUserId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-    public String getUsername() {
-        return username;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccount(String account) {
+        this.account = account;
     }
     public String getPassword() {
         return password;
@@ -147,33 +96,19 @@ public class SysUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-    public String getSalt() {
-        return salt;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
     public String getMobile() {
         return mobile;
@@ -189,26 +124,12 @@ public class SysUser implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Integer getUserType() {
-        return userType;
+    public Integer getCreateId() {
+        return createId;
     }
 
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-    public Integer getQueryType() {
-        return queryType;
-    }
-
-    public void setQueryType(Integer queryType) {
-        this.queryType = queryType;
-    }
-    public String getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
+    public void setCreateId(Integer createId) {
+        this.createId = createId;
     }
     public Date getCreateTime() {
         return createTime;
@@ -217,6 +138,13 @@ public class SysUser implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    public Integer getUpdateId() {
+        return updateId;
+    }
+
+    public void setUpdateId(Integer updateId) {
+        this.updateId = updateId;
+    }
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -224,64 +152,29 @@ public class SysUser implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-    public Date getDeleteTime() {
-        return deleteTime;
+    public Boolean getDelete() {
+        return isDelete;
     }
 
-    public void setDeleteTime(Date deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-    public String getCreateId() {
-        return createId;
-    }
-
-    public void setCreateId(String createId) {
-        this.createId = createId;
-    }
-    public String getUpdateId() {
-        return updateId;
-    }
-
-    public void setUpdateId(String updateId) {
-        this.updateId = updateId;
-    }
-    public String getDeleteId() {
-        return deleteId;
-    }
-
-    public void setDeleteId(String deleteId) {
-        this.deleteId = deleteId;
-    }
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
     @Override
     public String toString() {
         return "SysUser{" +
-        "sysUserId=" + sysUserId +
-        ", username=" + username +
-        ", password=" + password +
-        ", nickname=" + nickname +
-        ", icon=" + icon +
-        ", salt=" + salt +
-        ", email=" + email +
-        ", mobile=" + mobile +
-        ", status=" + status +
-        ", userType=" + userType +
-        ", queryType=" + queryType +
-        ", departmentId=" + departmentId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleteTime=" + deleteTime +
-        ", createId=" + createId +
-        ", updateId=" + updateId +
-        ", deleteId=" + deleteId +
-        ", deleted=" + deleted +
+            "userId=" + userId +
+            ", account=" + account +
+            ", password=" + password +
+            ", username=" + username +
+            ", sex=" + sex +
+            ", mobile=" + mobile +
+            ", status=" + status +
+            ", createId=" + createId +
+            ", createTime=" + createTime +
+            ", updateId=" + updateId +
+            ", updateTime=" + updateTime +
+            ", isDelete=" + isDelete +
         "}";
     }
 }

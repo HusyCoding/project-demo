@@ -48,7 +48,7 @@ public class ShiroRealm extends AuthorizingRealm {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
         // 查询用户角色，一个用户可能有多个角色
-        List<SysRole> roleList = sysRoleService.listRolesByUserId(user.getSysUserId());
+        List<SysRole> roleList = sysRoleService.listRolesByUserId(user.getUserId());
 
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -56,7 +56,7 @@ public class ShiroRealm extends AuthorizingRealm {
             //添加角色
 //            simpleAuthorizationInfo.addRole(role.getSysRoleId());
             // 根据角色查询权限
-            List<SysMenu> sysMenuList = sysMenuService.listMenusByRoleId(role.getSysRoleId());
+            List<SysMenu> sysMenuList = sysMenuService.listMenusByRoleId(role.getRoleId());
             for (SysMenu sysMenu : sysMenuList) {
                 simpleAuthorizationInfo.addStringPermission(sysMenu.getPermission());
             }
