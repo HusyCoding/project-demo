@@ -1,7 +1,7 @@
 package com.husy.springdemo.service.mybatisplus;
 
-import com.husy.springdemo.dao.entity.SysUserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.husy.springdemo.dao.entity.SysUserRole;
 
 /**
  * <p>

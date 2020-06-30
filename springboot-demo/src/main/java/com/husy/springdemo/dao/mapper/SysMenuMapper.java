@@ -1,7 +1,7 @@
 package com.husy.springdemo.dao.mapper;
 
-import com.husy.springdemo.dao.entity.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.husy.springdemo.dao.entity.SysMenu;
 
 import java.util.List;
 

@@ -1,9 +1,13 @@
-CREATE TABLE IF NOT EXISTS `sys_region` (
+-- ----------------------------
+-- Table structure for sys_region
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_region`;
+CREATE TABLE `sys_region` (
   `region_code` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '行政区域编码',
   `region_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '行政区域名称',
   `parent_code` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '上级行政区域编码',
-  `region_type` tinyint(4) unsigned NOT NULL COMMENT '行政区域级别：1-省/直辖市; 2-省级市/地级市/州; 3-区/县/县级市',
-  `is_delete` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除：0-未删除，1-已删除'
+  `region_type` tinyint unsigned NOT NULL COMMENT '行政区域级别：1-省/直辖市; 2-省级市/地级市/州; 3-区/县/县级市',
+  `is_delete` tinyint unsigned NOT NULL DEFAULT '0' COMMENT '是否删除：0-未删除，1-已删除'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=55 COMMENT='区域信息:\r\n第一、二位表示省（自治区、直辖市、特别行政区）。\r\n第三、四位表示市（地区、自治州、盟及国家直辖市所属市辖区和县的汇总码）。其中，01-20，51-70表示省直辖市；21-50表示地区（自治州、盟）。\r\n第五、六位表示县（市辖区、县级市、旗）。01-20表示市辖区或地区（自治州、盟）辖县级市；21-70表示县（旗）；81-99表示省直辖县级市；71-80表示工业园区或者经济开发区。';
 
 ##########2020年2月中华人民共和国县以上行政区划代码#############

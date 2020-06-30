@@ -1,10 +1,10 @@
 package com.husy.springdemo.service.mybatisplus.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.husy.springdemo.dao.entity.SysUser;
 import com.husy.springdemo.dao.mapper.SysUserMapper;
 import com.husy.springdemo.service.mybatisplus.ISysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
