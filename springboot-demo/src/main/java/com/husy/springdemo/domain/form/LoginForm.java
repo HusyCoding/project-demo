@@ -1,4 +1,4 @@
-package com.ycxc.admin.domain.form;
+package com.husy.springdemo.domain.form;
 
 import javax.validation.constraints.NotBlank;
 

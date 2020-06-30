@@ -1,9 +1,10 @@
-package com.ycxc.admin.dao.ycxcadmin.entity;
+package com.husy.springdemo.dao.entity;
 
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>

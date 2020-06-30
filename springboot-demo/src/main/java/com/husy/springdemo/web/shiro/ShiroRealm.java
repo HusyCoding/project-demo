@@ -1,5 +1,11 @@
-package com.husy.springdemo.web.config;
+package com.husy.springdemo.web.shiro;
 
+import com.husy.springdemo.dao.entity.SysMenu;
+import com.husy.springdemo.dao.entity.SysRole;
+import com.husy.springdemo.dao.entity.SysUser;
+import com.husy.springdemo.service.mybatisplus.ISysMenuService;
+import com.husy.springdemo.service.mybatisplus.ISysRoleService;
+import com.husy.springdemo.service.mybatisplus.ISysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * shiro 用户认证和授权
@@ -20,12 +27,12 @@ import java.util.List;
  */
 public class ShiroRealm extends AuthorizingRealm {
     private final Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
-
     @Autowired
-    SystemUserService systemUserService;
-
+    ISysUserService sysUserService;
     @Autowired
-    SystemRoleService systemRoleService;
+    ISysRoleService sysRoleService;
+    @Autowired
+    ISysMenuService sysMenuService;
 
     /**
      * 授权：验证权限时调用
@@ -36,25 +43,22 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         logger.info("---------------- 执行 Shiro 权限获取 ---------------------");
-
-        SystemUser user = systemUserService.findUserByName(name);
+//        SysUser user = systemUserService.findUserByName(name);
         // 获取用户第二种方式
-        SystemUser user = (SystemUser) SecurityUtils.getSubject().getPrincipal();
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 
-        // 获取用户角色
-        List<SystemRole> roleList = systemRoleService.findRoleByUserId(user.getUserId());
-        // 获取用户所有菜单功能权限
-        List<SystemRole> menuList = systemMenuService.findMenuByRoles(roleList);
+        // 查询用户角色，一个用户可能有多个角色
+        List<SysRole> roleList = sysRoleService.listRolesByUserId(user.getSysUserId());
 
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-
-        for (SystemRole role : roleList) {
+        for (SysRole role : roleList) {
             //添加角色
-            simpleAuthorizationInfo.addRole(role.getRoleCode());
-            for (SysPermis permis: role.getPermissions()) {
-                //添加权限
-                simpleAuthorizationInfo.addStringPermission(permis.getPermis());
+//            simpleAuthorizationInfo.addRole(role.getSysRoleId());
+            // 根据角色查询权限
+            List<SysMenu> sysMenuList = sysMenuService.listMenusByRoleId(role.getSysRoleId());
+            for (SysMenu sysMenu : sysMenuList) {
+                simpleAuthorizationInfo.addStringPermission(sysMenu.getPermission());
             }
         }
         return simpleAuthorizationInfo;
@@ -75,16 +79,19 @@ public class ShiroRealm extends AuthorizingRealm {
         String username = usernamePasswordToken.getUsername();
 
         // 查询用户信息
-        SystemUser systemUser = systemUserService.findUserByName(username);
-
-        if (null == systemUser) {
+        SysUser sysUser = sysUserService.getUserByName(username);
+        if (Objects.isNull(sysUser)) {
             throw new UnknownAccountException();
         }
-        if(systemUser.getStatus() == -1) {
+        if (sysUser.getStatus() == -1) {
             throw new LockedAccountException("账户已被锁定！");
         }
-
-        logger.info("---------------- Shiro 凭证认证成功 ----------------------");
-        return new SimpleAuthenticationInfo(systemUser, password, getName());
+        /*
+         * SimpleAuthenticationInfo 对象参数说明：
+         * 第一个参数：这里传入的是user对象，比对的是用户名，直接传入用户名也没错，但是在授权部分就需要自己重新从数据库里取权限
+         * 第二个参数：密码
+         * 第三个参数：realm name
+         */
+        return new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(), getName());
     }
 }

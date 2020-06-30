@@ -1,4 +1,4 @@
-package com.husy.springdemo.web.filter;
+package com.husy.springdemo.web.shiro;
 
 import com.alibaba.druid.wall.violation.ErrorCode;
 import com.husy.springdemo.common.constant.ResponseCode;
@@ -92,7 +92,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
             HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
             httpResponse.setStatus(HttpStatus.OK.value());
             httpResponse.setContentType("application/json;charset=utf-8");
-            httpResponse.getWriter().write("{\"code\":" + ResponseCode.UNAUTHENTIC.getCode() + ", \"msg\":\"" + "您已被强制下线！" + "\"}");
+            httpResponse.getWriter().write("{\"code\":" + ResponseCode.LOGIN_KICKOUT.getCode() + ", \"msg\":\"" + ResponseCode.LOGIN_KICKOUT.getMessage() + "\"}");
             return false;
         }
         return true;

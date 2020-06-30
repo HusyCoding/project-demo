@@ -6,7 +6,14 @@ package com.husy.springdemo.common.tool;
  */
 public class UserTool {
 
-    //TODO 方法一、获取当前用户信息
+    /**
+     * 获取当前用户信息
+     * @return
+     */
+    public static SysUser getUser() {
+        return  (SysUser) SecurityUtils.getSubject().getPrincipal();
+    }
+
     //TODO 方法二、获取当前用户的数据权限，如区域范围权限
 
     /**
@@ -16,4 +23,5 @@ public class UserTool {
     public static String getAccount() {
         return null;
     }
+
 }

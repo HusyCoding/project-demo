@@ -1,4 +1,4 @@
-package com.ycxc.admin.web.config;
+package com.husy.springdemo.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +7,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * @author Administrator
+ */
 @Configuration
 public class ExecutorConfig {
 

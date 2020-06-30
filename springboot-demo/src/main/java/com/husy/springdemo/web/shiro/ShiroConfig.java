@@ -1,4 +1,4 @@
-package com.husy.springdemo.web.config;
+package com.husy.springdemo.web.shiro;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -40,6 +40,8 @@ public class ShiroConfig {
     private String redis_port;
     @Value("${spring.redis.password}")
     private String password;
+    @Value("${spring.redis.timeout}")
+    private int timeout;
 
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
@@ -134,7 +136,8 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultWebSessionManager sessionManager() {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //自定义session
+        DefaultWebSessionManager sessionManager = new ShiroSessionManager();
         //设置sessionDao
         sessionManager.setSessionDAO(sessionDAO());
         //配置session的监听
@@ -176,8 +179,6 @@ public class ShiroConfig {
         // redis中针对不同用户缓存
         // 必须要设置主键名称，shiro-redis 插件用过这个缓存用户信息
         redisCacheManager.setPrincipalIdFieldName("userId");
-        //用户权限信息缓存时间
-        redisCacheManager.setExpire(CACHE_TIMEOUT);
         return redisCacheManager;
     }
 
@@ -217,7 +218,7 @@ public class ShiroConfig {
         redisManager.setHost(redis_host + ":" + redis_port);
         //redisManager.setPassword(password);
         // 配置缓存过期时间
-        redisManager.setTimeout(2000);
+        redisManager.setTimeout(timeout);
         return redisManager;
     }
 

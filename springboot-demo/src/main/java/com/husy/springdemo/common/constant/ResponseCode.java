@@ -18,7 +18,7 @@ public enum ResponseCode {
     SUCCESS("0000", "请求成功"),
     FAILED("1000", "请求失败"),
     //未知异常，友好提示处理
-    UNKNOWN_ERROR("x9999999","服务器繁忙，请稍后重试"),
+    UNKNOWN_ERROR("x9999999","未知异常"),
 
     // 01:网络错误
     TIMEOUT_NETWORK("x1010001","连接超时"),
@@ -40,6 +40,8 @@ public enum ResponseCode {
     BLACK_IP_AUTHORIZATION("x2040002", "黑名单IP"),
     LOGIN_OVERTIME_AUTHORIZATION("x2040003", "登录失效"),
     LOGIN_FAILED_AUTHORIZATION("x2040004", "用户名或密码错误"),
+    ACCOUNT_UNAUTHORIZED("x2040007", "用户未认证"),
+    INVALID_ACCOUNT("x2040007", "无效用户"),
     LOGIN_KICKOUT("x2040005", "强制下线"),
     PERMISSION_DENIED_AUTHORIZATION("x2040006", "访问权限不足"),
 

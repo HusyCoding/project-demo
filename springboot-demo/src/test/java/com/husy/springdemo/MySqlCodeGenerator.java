@@ -62,28 +62,28 @@ public class MySqlCodeGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setTypeConvert(new MySqlTypeConvert() {
-            @Override
-            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-                //tinyint转换成Boolean
-                if (fieldType.toLowerCase().contains("tinyint")) {
-                    return DbColumnType.BOOLEAN;
-                }
-                //将数据库中datetime转换成date
-                if (fieldType.toLowerCase().contains("datetime")) {
-                    return DbColumnType.DATE;
-                }
-                //将数据库中datetime转换成date
-                if (fieldType.toLowerCase().contains("timestamp")) {
-                    return DbColumnType.DATE;
-                }
-                //将数据库中datetime转换成date
-                if (fieldType.toLowerCase().contains("char")) {
-                    return DbColumnType.STRING;
-                }
-                return super.processTypeConvert(globalConfig, fieldType);
-            }
-        });
+//        dsc.setTypeConvert(new MySqlTypeConvert() {
+//            @Override
+//            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+//                //tinyint转换成Boolean
+//                if (fieldType.toLowerCase().contains("tinyint")) {
+//                    return DbColumnType.BOOLEAN;
+//                }
+//                //将数据库中datetime转换成date
+//                if (fieldType.toLowerCase().contains("datetime")) {
+//                    return DbColumnType.DATE;
+//                }
+//                //将数据库中datetime转换成date
+//                if (fieldType.toLowerCase().contains("timestamp")) {
+//                    return DbColumnType.DATE;
+//                }
+//                //将数据库中datetime转换成date
+//                if (fieldType.toLowerCase().contains("char")) {
+//                    return DbColumnType.STRING;
+//                }
+//                return super.processTypeConvert(globalConfig, fieldType);
+//            }
+//        });
         mpg.setDataSource(dsc);
 
         // 包配置

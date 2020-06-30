@@ -1,7 +1,7 @@
-package com.ycxc.admin.dao.ycxcadmin.mapper;
+package com.husy.springdemo.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ycxc.admin.dao.ycxcadmin.entity.AreaUser;
+import com.husy.springdemo.dao.entity.AreaUser;
 
 /**
  * <p>
