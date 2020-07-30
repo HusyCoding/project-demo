@@ -1,9 +1,9 @@
 package com.husy.springdemo.service.mybatisplus.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.husy.springdemo.dao.entity.SysUserRole;
 import com.husy.springdemo.dao.mapper.SysUserRoleMapper;
 import com.husy.springdemo.service.mybatisplus.ISysUserRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

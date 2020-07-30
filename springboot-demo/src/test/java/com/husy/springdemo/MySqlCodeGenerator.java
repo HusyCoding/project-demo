@@ -49,6 +49,9 @@ public class MySqlCodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
+
+        System.out.println(projectPath);
+
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("husy");
         gc.setOpen(false);
@@ -61,10 +64,14 @@ public class MySqlCodeGenerator {
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("123456");
+        dsc.setPassword("12345678");
         dsc.setTypeConvert(new MySqlTypeConvert() {
             @Override
             public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+                //将数据库中datetime转换成date
+                if (fieldType.toLowerCase().contains("tinyint")) {
+                    return DbColumnType.INTEGER;
+                }
                 //将数据库中datetime转换成date
                 if (fieldType.toLowerCase().contains("datetime")) {
                     return DbColumnType.DATE;

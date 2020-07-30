@@ -1,9 +1,9 @@
 package com.husy.springdemo.service.mybatisplus.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.husy.springdemo.dao.entity.SysMenu;
 import com.husy.springdemo.dao.mapper.SysMenuMapper;
 import com.husy.springdemo.service.mybatisplus.ISysMenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
