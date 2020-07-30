@@ -1,4 +1,4 @@
-package com.husy.springdemo.common.util;
+package com.husy.springdemo.common.tool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
